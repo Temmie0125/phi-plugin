@@ -231,12 +231,14 @@ export default new class getInfo {
         this.tips = await readFile.FileReader(path.join(infoPath, 'tips.txt')).replace(/\r/g, '').split('\n')
 
         /**自定义信息 */
-        let user_song = Config.getUserCfg('config', 'otherinfo')
-        if (Config.getUserCfg('config', 'otherinfo')) {
+        let user_song = Config.getUserCfg('otherinfo')
+        if (user_song) {
             for (let i in user_song) {
                 if (user_song[i]['illustration_big']) {
-                    this.illlist.push(user_song[i].song)
+                    this.illlist.push(user_song[i].id || i)
                 }
+                this.idList.push(user_song[i].id || i)
+                this.songlist.push(user_song[i].song)
             }
         }
 
